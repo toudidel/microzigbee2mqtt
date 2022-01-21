@@ -1,0 +1,76 @@
+micronaut:
+  application:
+    name: microzigbee2mqtt
+
+logger:
+  levels:
+    pl:
+      micronaut: INFO
+
+mqtt:
+  client:
+    client-id: ${random.uuid}
+    server-uri: tcp://localhost:1883
+    user-name:
+    password:
+
+email:
+  enabled: false
+  recipient: recipient@gmail.com
+  smtp:
+    host: smtp.gmail.com
+    port: 465
+    ssl: true
+    username: your-email@gmail.com
+    password: your-password
+
+pushover:
+  enabled: false
+  user: your-username
+  token: your-application-token
+
+zigbee2mqtt:
+  queue-prefix: zigbee2mqtt/d/
+  devices:
+    - name: salon/button
+    - name: salon/lamp
+    - name: salon/button4gang
+  scenes:
+    - name: button_enables_lamp
+      device: salon/button
+      property: action
+      value: single
+      triggers:
+        - device: salon/lamp
+          property: state
+          value: toggle
+    - name: button_enables_another_button
+      device: salon/button
+      property: action
+      value: double
+      triggers:
+        - device: salon/button4gang
+          property: action
+          value: 1_single
+        - do-not-disable: button_enables_lamp
+    - name: blink_lamp
+      cron: "0/15 * * * * ?"
+      notification:
+        email: false
+        pushover: false
+      triggers:
+        - device: salon/lamp
+          property: state
+          value: toggle
+    - name: button_disables_scene
+      device: salon/button4gang
+      property: action
+      value: 1_single
+      triggers:
+        - disable: button_enables_lamp
+    - name: button_enables_scene
+      device: salon/button4gang
+      property: action
+      value: 2_single
+      triggers:
+        - enable: button_enables_lamp

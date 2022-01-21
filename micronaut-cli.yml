@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: pl.micronaut
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, http-client, java, java-application, junit, logback, lombok, maven, mqtt, netty-server, readme, shade, yaml]
