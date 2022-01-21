@@ -6,6 +6,7 @@ import pl.micronaut.model.State;
 import pl.micronaut.model.request.SceneRequest;
 
 import java.util.Map;
+import java.util.Optional;
 
 /** State service. */
 public interface StateService {
@@ -25,6 +26,13 @@ public interface StateService {
   State getState();
 
   /**
+   * Returns state of specific device.
+   *
+   * @return device state if exists
+   */
+  Optional<State.DeviceMessage> getDeviceState(String device);
+
+  /**
    * Saves state of devices using most recent message.
    *
    * @param device device
@@ -37,7 +45,7 @@ public interface StateService {
    *
    * @return map
    */
-  Map<String, Integer> getStateVolatge();
+  Map<String, Integer> getStateVoltage();
 
   /**
    * Returns map with battery values for all devices have property battery.

@@ -46,6 +46,14 @@ public class StateServiceImpl implements StateService {
   }
 
   @Override
+  public Optional<DeviceMessage> getDeviceState(String device) {
+    return STATE.getDeviceMessages().entrySet().stream()
+        .filter(e -> e.getKey().equals(device))
+        .map(e -> e.getValue())
+        .findFirst();
+  }
+
+  @Override
   public void saveState(String device, Message message) {
     LocalDateTime now = LocalDateTime.now();
 
@@ -58,7 +66,7 @@ public class StateServiceImpl implements StateService {
   }
 
   @Override
-  public Map<String, Integer> getStateVolatge() {
+  public Map<String, Integer> getStateVoltage() {
     return STATE.getDeviceMessages().entrySet().stream()
         .filter(e -> Objects.nonNull(e.getValue().getMessage().getVoltage()))
         .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().getMessage().getVoltage()));

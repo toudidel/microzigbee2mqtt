@@ -1,9 +1,6 @@
 package pl.micronaut.controller;
 
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pl.micronaut.configuration.ApplicationProperties;
@@ -31,9 +28,14 @@ public class StateController {
     return stateService.getState();
   }
 
+  @Get("/device")
+  public State.DeviceMessage getDeviceState(@QueryValue String name) {
+    return stateService.getDeviceState(name).orElse(null);
+  }
+
   @Get("/state/voltage")
   public Map<String, Integer> getStateVoltage() {
-    return stateService.getStateVolatge();
+    return stateService.getStateVoltage();
   }
 
   @Get("/state/battery")
