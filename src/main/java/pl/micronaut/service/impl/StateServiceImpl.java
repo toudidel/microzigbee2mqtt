@@ -40,7 +40,7 @@ public class StateServiceImpl implements StateService {
   @Override
   public State getState() {
     if (STATE == null) {
-      STATE = State.builder().deviceMessages(new HashMap<>()).build();
+      STATE = State.builder().deviceMessages(new TreeMap<>()).build();
     }
     return STATE;
   }
