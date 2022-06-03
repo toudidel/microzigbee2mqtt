@@ -20,25 +20,7 @@ public class MqttController {
   @Value("${zigbee2mqtt.queue-prefix}")
   public String queuePrefix;
 
-  @Get("/{queue}")
-  public void actionFoo(@QueryValue String queue) {
-    publisherService.send(
-        PublisherMessage.builder()
-            .topic(queuePrefix + queue)
-            .message(Message.builder().action("foo").build())
-            .build());
-  }
-
-  @Get("/{queue}/{value}")
-  public void actionValue(@QueryValue String queue, @QueryValue String value) {
-    publisherService.send(
-        PublisherMessage.builder()
-            .topic(queuePrefix + queue)
-            .message(Message.builder().action(value).build())
-            .build());
-  }
-
-  @Get("/{queue}/{property}/{value}")
+  @Get()
   public void propertyValue(
       @QueryValue String queue, @QueryValue String property, @QueryValue String value) {
     publisherService.send(
