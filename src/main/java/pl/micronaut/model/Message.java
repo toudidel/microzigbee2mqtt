@@ -21,6 +21,10 @@ public class Message {
   private String action;
   private String occupancy;
   private String state;
+  private String state_l1;
+  private String state_l2;
+  private String state_l3;
+  private String state_l4;
   private Double current;
   private Double energy;
   private Double humidity;
@@ -55,6 +59,14 @@ public class Message {
         return StringCommonUtils.valueOf(occupancy).equals(value);
       case MessageProperty.STATE:
         return StringCommonUtils.valueOf(state).equals(value);
+      case MessageProperty.STATE_L1:
+        return StringCommonUtils.valueOf(state_l1).equals(value);
+      case MessageProperty.STATE_L2:
+        return StringCommonUtils.valueOf(state_l2).equals(value);
+      case MessageProperty.STATE_L3:
+        return StringCommonUtils.valueOf(state_l3).equals(value);
+      case MessageProperty.STATE_L4:
+        return StringCommonUtils.valueOf(state_l4).equals(value);
       case MessageProperty.WATER_LEAK:
         return BooleanUtils.compare(BooleanUtils.isTrue(waterLeak), BooleanUtils.toBoolean(value))
             == 0;
@@ -71,6 +83,18 @@ public class Message {
           break;
         case MessageProperty.STATE:
           this.state = value;
+          break;
+        case MessageProperty.STATE_L1:
+          this.state_l1 = value;
+          break;
+        case MessageProperty.STATE_L2:
+          this.state_l2 = value;
+          break;
+        case MessageProperty.STATE_L3:
+          this.state_l3 = value;
+          break;
+        case MessageProperty.STATE_L4:
+          this.state_l4 = value;
           break;
         case MessageProperty.ALARM:
           this.alarm = BooleanUtils.toBooleanObject(value);

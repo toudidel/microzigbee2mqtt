@@ -34,7 +34,9 @@ zigbee2mqtt:
   devices:
     - name: salon/button
     - name: salon/lamp
+    - name: salon/lamp2
     - name: salon/button4gang
+    - name: salon/button1gang
   scenes:
     - name: button_enables_lamp
       device: salon/button
@@ -53,6 +55,14 @@ zigbee2mqtt:
           property: action
           value: 1_single
         - do-not-disable: button_enables_lamp
+    - name: button_enables_some_lamp
+      device: salon/button1gang
+      property: action
+      value: single
+      triggers:
+        - device: salon/lamp2
+          property: state_l1
+          value: toggle
     - name: blink_lamp
       cron: "0/15 * * * * ?"
       notification:
