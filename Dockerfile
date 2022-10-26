@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM bellsoft/liberica-openjdk-alpine:17
 #FROM adoptopenjdk/openjdk11:armv7l-ubuntu-jre-11.0.8_10
 ADD target/zigbee2mqtt-*.jar /opt/microzigbee2mqtt.jar
 ADD src/main/resources/application.example.yml /opt/application.yml
